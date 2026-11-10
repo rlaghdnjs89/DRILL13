@@ -7,6 +7,12 @@ import title_mode
 from boy import Boy
 from grass import Grass
 
+ITEM_NAMES = {
+    None: 'No Ball',
+    'SmallBall': 'Small Ball',
+    'BigBall': 'Big Ball',
+}
+
 boy = None
 paused = False
 paused_at = 0.0
@@ -70,6 +76,8 @@ def update():
 def render():
     clear_canvas()
     game_world.render()
+    hint_font.draw(10, get_canvas_height() - 20,
+                   f'Item: {ITEM_NAMES[boy.item]}  (I: select)', (0, 0, 0))
     if paused:
         pause_font.draw(290, 330, 'PAUSED', (255, 255, 0))
         hint_font.draw(298, 270, 'Press P to resume', (255, 255, 255))
