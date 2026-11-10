@@ -2,6 +2,7 @@ from pico2d import *
 
 import game_framework
 import game_world
+import item_mode
 import title_mode
 from boy import Boy
 from grass import Grass
@@ -34,6 +35,9 @@ def handle_events():
             return
         elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
             toggle_pause()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_i:
+            game_framework.push_mode(item_mode)
+            return
         elif paused:
             # 일시정지 중에는 키를 뗀 이벤트만 전달 (방향키를 누른 채 멈췄다가 떼는 경우 처리)
             if event.type == SDL_KEYUP:
