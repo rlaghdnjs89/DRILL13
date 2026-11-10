@@ -41,12 +41,14 @@ def handle_events():
 
 
 def update():
-    pass
+    # IDLE 타이머도 그대로 흘러가므로, 선택 창에서 오래 머물면 소년이 잠든다
+    # 화면이 멈춘 것처럼 보이지 않도록 월드는 계속 갱신 (방향키 입력은 전달하지 않으므로 좌우 이동 불가)
+    game_world.update()
 
 
 def render():
     clear_canvas()
-    # 뒤에 멈춰 있는 플레이 화면을 그대로 그리고, 그 위에 선택 창을 띄운다
+    # 뒤에서 계속 움직이는 플레이 화면을 그대로 그리고, 그 위에 선택 창을 띄운다
     game_world.render()
     image.draw(get_canvas_width() // 2, get_canvas_height() // 2)
     update_canvas()

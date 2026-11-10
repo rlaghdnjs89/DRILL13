@@ -88,19 +88,14 @@ def finish():
     game_world.clear()
 
 
-item_mode_entered_at = 0.0
-
-
 def pause():
-    global item_mode_entered_at
-    item_mode_entered_at = get_time()
-
-
-def resume():
-    # 아이템 선택 창이 떠 있던 시간만큼 IDLE 타이머를 밀어서, 돌아오자마자 잠들지 않게 함
-    boy.idle_started_at += get_time() - item_mode_entered_at
-    # 선택 창에 있는 동안 뗀 방향키 이벤트는 boy에게 전달되지 않았으므로 입력 상태를 초기화
+    # 아이템 선택 창에서는 좌우로 이동할 수 없으므로, 달리던 중이면 그 자리에 멈춰 서게 함
     boy.pressed_keys.clear()
     if boy.state == 'RUN':
         boy.dir = 0
         boy.stop_run()
+
+
+def resume():
+    # 선택 창에 있는 동안 뗀 방향키 이벤트는 boy에게 전달되지 않았으므로 입력 상태를 초기화
+    boy.pressed_keys.clear()
