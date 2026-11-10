@@ -22,6 +22,10 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            # 아무것도 바꾸지 않고 플레이 모드로 돌아간다
+            game_framework.pop_mode()
+            return
 
 
 def update():
