@@ -2,6 +2,14 @@ from pico2d import *
 
 import game_framework
 import game_world
+import play_mode
+
+# 0: 공 없음, 1: 작은 공, 2: 큰 공
+ITEM_KEYS = {
+    SDLK_0: None,
+    SDLK_1: 'SmallBall',
+    SDLK_2: 'BigBall',
+}
 
 image = None
 
@@ -24,6 +32,10 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             # 아무것도 바꾸지 않고 플레이 모드로 돌아간다
+            game_framework.pop_mode()
+            return
+        elif event.type == SDL_KEYDOWN and event.key in ITEM_KEYS:
+            play_mode.boy.item = ITEM_KEYS[event.key]
             game_framework.pop_mode()
             return
 
