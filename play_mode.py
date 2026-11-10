@@ -35,7 +35,7 @@ def handle_events():
             return
         elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
             toggle_pause()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_i:
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_i and not paused:
             game_framework.push_mode(item_mode)
             return
         elif paused:
