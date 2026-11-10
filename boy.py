@@ -8,6 +8,12 @@ from transitions import Machine
 import game_world
 from ball import Ball
 
+# 큰 공은 무거워서 조금 느리게 날아간다
+BALL_SPEED = {
+    'SmallBall': 10,
+    'BigBall': 7,
+}
+
 
 class Boy:
     def __init__(self):
@@ -48,7 +54,10 @@ class Boy:
         self.frame = 0
 
     def fire_ball(self):
-        ball = Ball(self.x, self.y, self.face_dir * 10)
+        if self.item is None:
+            return  # 공이 없으면 던지지 않는다
+        ball = Ball(self.x, self.y, self.face_dir * BALL_SPEED[self.item],
+                    self.item)
         game_world.add_oject(ball)
 
     def handle_event(self, event):
